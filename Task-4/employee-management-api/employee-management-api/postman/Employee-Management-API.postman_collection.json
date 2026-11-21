@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "Employee Management API",
+    "description": "Requests for the Employee Management Spring Boot project.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{"key": "baseUrl", "value": "http://localhost:8080"}, {"key": "employeeId", "value": "1"}],
+  "item": [
+    {"name": "Departments", "item": [{"name": "Get all departments", "request": {"method": "GET", "url": "{{baseUrl}}/api/departments"}}]},
+    {"name": "Employees", "item": [
+      {"name": "Create employee", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{
+  "name": "Arun Kumar",
+  "email": "arun@example.com",
+  "salary": 45000.00,
+  "departmentId": 1
+}"}, "url": "{{baseUrl}}/api/employees"}},
+      {"name": "Get employees (pagination)", "request": {"method": "GET", "url": "{{baseUrl}}/api/employees?page=0&size=10&sortBy=name&direction=asc"}},
+      {"name": "Search employees by name", "request": {"method": "GET", "url": "{{baseUrl}}/api/employees?name=arun"}},
+      {"name": "Filter by department", "request": {"method": "GET", "url": "{{baseUrl}}/api/employees?departmentId=1"}},
+      {"name": "Get employee by ID", "request": {"method": "GET", "url": "{{baseUrl}}/api/employees/{{employeeId}}"}},
+      {"name": "Update employee", "request": {"method": "PUT", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{
+  "name": "Arun Kumar",
+  "email": "arun.kumar@example.com",
+  "salary": 50000.00,
+  "departmentId": 1
+}"}, "url": "{{baseUrl}}/api/employees/{{employeeId}}"}},
+      {"name": "Delete employee", "request": {"method": "DELETE", "url": "{{baseUrl}}/api/employees/{{employeeId}}"}},
+      {"name": "Missing name validation test", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{
+  "email": "missing-name@example.com",
+  "salary": 30000,
+  "departmentId": 1
+}"}, "url": "{{baseUrl}}/api/employees"}},
+      {"name": "Duplicate email test", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{
+  "name": "Duplicate Test",
+  "email": "arun@example.com",
+  "salary": 30000,
+  "departmentId": 1
+}"}, "url": "{{baseUrl}}/api/employees"}},
+      {"name": "Invalid department test", "request": {"method": "POST", "header": [{"key": "Content-Type", "value": "application/json"}], "body": {"mode": "raw", "raw": "{
+  "name": "Test User",
+  "email": "test-user@example.com",
+  "salary": 30000,
+  "departmentId": 99999
+}"}, "url": "{{baseUrl}}/api/employees"}}
+    ]}
+  ]
+}
